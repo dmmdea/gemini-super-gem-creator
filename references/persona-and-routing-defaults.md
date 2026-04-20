@@ -231,3 +231,30 @@ Add this block to SessionMemory JSON for any harness-bearing or Opal gem:
 
 The gem increments `harness_quota_used_today_min` after each Apps Script dispatch
 and warns User when it approaches 75 minutes (5 min buffer before 90 min daily limit).
+
+---
+
+## Research Gem Dual-Channel Behavior Model
+
+Research Gems (Tier 3 with deep-research intent) run across two independent response channels, each with different behavioral guarantees. Designers must pick the channel that matches the rules they need enforced.
+
+### The Two Channels
+
+| Channel | What it is | System-prompt role enforcement | Best for |
+|---------|-----------|-------------------------------|----------|
+| **Conversational mode** | Standard Gemini turn, Gem's system prompt owns the response | **Full** — role discipline, session rituals, memory updates, output tags, redirect behavior, HITL gates all enforceable | Advisory Q&A, redirects, memory writes, constraint enforcement, session-open rituals |
+| **Deep Research mode** | Google-operated research agent runs the prompt; Gem's system prompt is treated as methodology input | **Partial** — only substance rules (sourcing, framework, triangulation) survive; form rules (rituals, tags, memory blocks) are suppressed by the DR agent's own response envelope | Source-volume research, framework-anchored essays, triangulated market analysis |
+
+### Design Implication
+
+**Scope discipline is a conversational-mode-only capability.** Deep Research cannot enforce system-prompt-level role boundaries — it interprets the Gem prompt at face value as research input and returns a research essay through its own response flow.
+
+### User Guidance (surface in Step 4 deploy notes for Research Gems)
+
+- **Use DR when:** you need source volume, framework-anchored depth, and triangulated citations; behavioral rules are less critical than research breadth.
+- **Use conversational mode when:** you need role discipline, session rituals, memory updates, output type tags, redirect behavior, or HITL gates. All form-layer behaviors live here.
+- **Use both (the validated pattern):** run DR for the research essay, then switch to conversational mode to have the Gem integrate findings, emit a MEMORY_UPDATE block, and apply role-scoped advisory logic on top of the essay.
+
+### Grading Implication
+
+See `step5-test.md` → "Channel-Appropriateness Gate" and `test-questions-template.md` → "Research Gem Adaptations" for the testing consequences of this dual-channel model.

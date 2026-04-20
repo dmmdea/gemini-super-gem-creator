@@ -133,6 +133,60 @@ Version: [current] → [new]
 
 ---
 
+## Research Gem Adaptations
+
+> **This section activates ONLY when testing a Research Gem (Tier 3 with deep-research intent).** Research Gems operate across two channels — conversational mode and Deep Research mode — and the test design must match the channel.
+
+### Channel-Aware Test Design (mandatory)
+
+Never cross channels. Each test must be designed for, and run in, the correct mode:
+
+| Test target | Mode | Why |
+|-------------|------|-----|
+| Sourcing discipline, framework naming, triangulation, proxy methodology | **Deep Research** | DR preserves rule substance; this is where research depth is demonstrable |
+| Role discipline, redirect behavior, session rituals, MEMORY_UPDATE emission, output type tags | **Conversational** | DR suppresses rule form; these rules are only enforceable in conversational mode |
+| Memory hub read, constraint respect, never-recommend list | **Conversational** | Same — DR agent does not honor system-prompt routing in the response envelope |
+
+If a test mixes the two (e.g., "in DR mode, verify the gem outputs `[SESSION_SUMMARY]`"), the test is **invalid** — redesign it before running.
+
+### Pre-Execution Refinement Loop (primary validation gate)
+
+DR's plan preview is the primary validation gate for Research Gems — **not** the final essay. The plan preview shows scope drift before any research executes, and refinements sent before "Start research" is clicked propagate into the essay's source selection and framework commitment.
+
+**Protocol for every DR-mode test:**
+
+1. Send the test prompt, let DR return the numbered research plan
+2. Grade the plan against the gem's methodology rules (sourcing, framework, triangulation)
+3. Send any refinements as in-chat replies BEFORE clicking "Start research"
+4. Re-read the revised plan; repeat refinement until plan matches methodology
+5. Only then: click "Start research" — the essay will anchor on the refined plan
+6. Grade the essay against substance rules only (see step5-test.md Research Gem grading framework)
+
+Skipping the refinement loop and grading only the essay will produce false failures — the plan drift was the real signal.
+
+### Source Pre-Commitment (highest-leverage refinement — mandatory template element)
+
+When you name authoritative sources in the refinement, the entire essay anchors on them. This is the single highest-leverage refinement available and must be included in every Research Gem test prompt or first refinement.
+
+**Template pattern:**
+> "Prioritize and cite the following authoritative sources where applicable: [Source A — official body], [Source B — trade association], [Source C — regulator], [Source D — industry body]. Use tier-1 official sources first; tier-2 trade/industry sources second; tier-3 general sources only when 1 and 2 are silent."
+
+**Example (validated on a Tier 3 Memory Gem deployment, April 2026):**
+> "Prioritize and cite: [national vehicle registry], [auto trade association], [energy planning authority], [insurance federation]. Use official > trade > general."
+
+This one refinement produced 40–64 citations per essay across 4 tests with 100% adherence to the named hierarchy.
+
+### Optional Refinements (include when applicable — high compliance rate)
+
+These are not mandatory but were 100%-compliant in Tier 3 validation. Include when they apply:
+
+- **Floor-anchor pricing:** "Express all revenue and market-size figures as ranges with a documented floor anchor (e.g., regulatory minimum, cheapest verified comparable). Name the floor source."
+- **Internal Drive asset references:** "Cross-reference findings against [specific internal document in the gem's Drive folder] where available. Cite the internal asset by filename when used."
+- **Venture-scale modeling frame:** "Express TAM/SAM/SOM over a 5-year horizon with year-by-year build-up; name the growth-rate assumption and its source."
+- **Watchlist / operational scaffold:** "End with an N-row watchlist table: signal name | source | check frequency | alert threshold | action."
+
+---
+
 ## Local Gem Adaptations
 
 > **This section activates ONLY when testing a Local Gem.** Standard and Research Gems use the tests above as-is.

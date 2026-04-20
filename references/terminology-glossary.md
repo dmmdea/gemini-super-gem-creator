@@ -1,4 +1,4 @@
-# Terminology Glossary — Super Gem Creator v7.0
+# Terminology Glossary — Super Gem Creator
 
 <!-- Cross-cutting lookup. Load when User asks "what is X?" or when any step
      needs canonical term clarification. Do NOT load by default — load on demand.

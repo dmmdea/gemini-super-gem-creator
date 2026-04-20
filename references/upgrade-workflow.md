@@ -1,4 +1,4 @@
-# Upgrade Workflow (v6.0) — Major Version Upgrades
+# Upgrade Workflow — Major Version Upgrades
 
 Use this workflow when upgrading an existing gem to a new skill version or making structural changes (adding tri-file, restructuring folders, major memory hub overhaul). Runs BEFORE the Quick Update Checklist.
 

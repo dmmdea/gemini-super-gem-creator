@@ -48,6 +48,40 @@ Google advertises a 1 million token context window for Gemini 3 Pro (200K for Fl
 - Deep Think mode has a **192,000 token** window — significantly more than the standard ~32K
 - This explains why Deep Research prompts work when standard prompts fail
 
+### Deep Research Mode — UI Behavior Quirks (IMPORTANT for gem design)
+
+When the user enables **Deep Research** in the Gemini UI, a platform-level research agent runs the prompt. This has two consequences that affect how custom Gem prompts behave:
+
+1. **Plan preview bypass:** Deep Research always returns a numbered, canonical **research plan** (1-N bullet steps, each phrased as a research sub-task) **before executing**. The user must approve or edit the plan before the actual research runs. This preview step is Gemini UI behavior, not Gem behavior — it happens regardless of what the Gem's system prompt says.
+2. **Session-open ritual override:** Custom rituals in the Gem's system prompt (e.g., `[SESSION_SUMMARY — OPENING]`, thinking blocks, output tags) are **skipped or compressed** when Deep Research runs, because the Deep Research agent owns the response flow on that turn. The ritual may re-emerge on follow-up turns that don't use Deep Research.
+
+**Implications for gem authors:**
+- Do NOT treat "missing SESSION_SUMMARY at Deep Research turn" as a Rule 4 violation — it's platform behavior.
+- Gem-side routing rules like `[RESEARCH_NEEDED]` still work for non-Deep-Research turns, and the Deep Research plan inherits the Gem's behavioral rules (sourcing discipline, framework naming, flagging) in the final output even if the opening ritual is skipped.
+- When validating a research gem in Step 5, grade the Deep Research plan preview against the system prompt's methodology rules (layered search, triangulation, framework commitment). If the plan defers framework choice or skips source pre-commitment, ask the user to reply in-chat with a refinement before hitting execute — the Gem will honor refinements before the actual research runs.
+
+### What DR Preserves vs Suppresses (Rule Substance vs Rule Form)
+
+Deep Research treats the Gem's system prompt as **research methodology input**, not as a behavioral harness. This produces a predictable split between what survives in the DR essay and what gets absorbed by the DR agent's own response flow. Grade these two layers separately.
+
+**DR PRESERVES (rule substance — non-negotiable, grade strictly):**
+- Sourcing discipline (authoritative source hierarchy, pre-commitment to named sources)
+- Framework naming and commitment (e.g., TAM/SAM/SOM, Porter's Five Forces, named by the gem)
+- Triangulation (≥2 independent sources per quantitative claim)
+- Proxy methodologies (where direct data is unavailable, gem must name the proxy)
+- Ranges-not-points discipline (empirical estimates expressed as ranges with bounds)
+- Bias disclosure (gem names the directional bias of its own sources)
+- Reliability ratings (gem grades confidence in each claim)
+- Source hierarchy adherence (tier-1 official > tier-2 trade > tier-3 general)
+
+**DR SUPPRESSES (rule form — format-accommodated, do not grade in DR mode):**
+- `[UNVERIFIED]` / `[ESTIMATED]` bracket tags (DR replaces with prose hedging: "empirical estimates", "directionally indicative", "subject to verification")
+- `[SESSION_SUMMARY]` / `[ADVISORY]` / `[MEMORY_FLAG]` output type tags (DR agent owns the response envelope)
+- Session-open ritual (`[SESSION_SUMMARY — OPENING]` block)
+- `---MEMORY_UPDATE---` emission (DR never writes memory — it's a one-shot research agent)
+
+**Grading rule:** If the essay passes every substance item above, the gem is DR-compliant **even if** no tag, ritual, or memory block appears. Conversely, if a tag is present but a triangulation is missing, the gem fails — form without substance is a worse signal than substance without form.
+
 ### How Each Context Source Consumes Tokens
 
 | Source | Loading Behavior | Token Impact |

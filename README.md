@@ -1,4 +1,4 @@
-# Super Gem Creator (v7.0)
+# Super Gem Creator (v0.7.1)
 
 A Cowork skill for building expert-level Gemini Gems and Opal (Gem from Labs) workflows with persistent Drive/Sheets memory, NotebookLM research grounding, and optional Harness-Proxy automation.
 
@@ -21,7 +21,7 @@ Super Gem Creator runs a structured 5-step pipeline that handles all of the abov
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                    Super Gem Creator v7.0                       │
+│                    Super Gem Creator v0.7.1                     │
 │                                                                 │
 │  ┌───────────┐  ┌───────────┐  ┌───────────┐                  │
 │  │ UNDERSTAND│→ │ GENERATE  │→ │ VALIDATE  │→ ...             │
@@ -77,7 +77,7 @@ Every build is automatically classified into one of six tiers from context. No t
 ## Architecture
 
 ```
-super-gem-creator-v7.0/
+super-gem-creator-v0.7.1/
 ├── SKILL.md                              # Thin router (166 lines) — loaded first
 │                                         # Mode detection, tier routing, step dispatch
 └── references/                           # 29 reference files — loaded on demand
@@ -145,7 +145,7 @@ Runs a calibrated test suite. Tier 1/2/3: 5 scenario tests with reflexion loop. 
 
 ---
 
-## Key v7 Features
+## Key Features
 
 ### Node Catalog (Tier 5/6)
 16-node quick-reference grid embedded in `step2-opal-delta.md`. Quick Reference card grid always loaded; individual `####` detail blocks loaded only when configuring that specific node type.
@@ -248,7 +248,7 @@ The skill triggers automatically on natural conversation:
 "Build me a gem for [domain]"              → Full 5-step build, tier auto-detected
 "Create an Opal workflow that does X"      → Tier 6 Gem from Labs pipeline
 "I want the gem to actually run the work"  → Tier 5 Harness-Proxy
-"Upgrade my existing [gem name] to v7"     → Upgrade workflow
+"Upgrade my existing [gem name] to latest" → Upgrade workflow
 "Test my gem"                              → Step 5 test suite only
 "Update the gem's memory"                  → Memory relay loop
 ```
@@ -289,6 +289,16 @@ The skill is designed for Cowork. The references and architecture assume the Cow
 ---
 
 ## Changelog
+
+> **Versioning note (2026-04-20).** Starting at v0.7.1, this skill uses [SemVer](https://semver.org/) on a `0.x.y` pre-1.0 track. Every prior "major" release (v2 → v7) was a breaking architectural rewrite, which is textbook pre-1.0 behavior — the `0.` prefix signals that reality. The "7" is preserved as the minor segment to honor seven generations of rewrites. Prior releases below retain their original labels (v7.0, v6.0) to match git history and archive folder names. When the architecture is frozen and committed to backward compatibility, v1.0.0 will be declared as a deliberate milestone.
+
+### v0.7.1 (2026-04-20) — Research Gem Deep Research channel patches
+- **Refinement**, not a rewrite: additive edits to four reference files only; no workflow, orchestration, or state-machine changes. A gem built with v0.7.0 is identical to one built with v0.7.1.
+- `gemini-gems-specs-and-limits.md` — added "What DR Preserves vs Suppresses (Rule Substance vs Rule Form)" subsection. Clarifies that Deep Research preserves sourcing/framework/triangulation rules but suppresses bracket tags, session rituals, and memory blocks. Grade the two layers separately.
+- `test-questions-template.md` — added "Research Gem Adaptations" section: channel-aware test design, pre-execution refinement loop as primary validation gate, source pre-commitment template, optional refinements (floor-anchor pricing, venture-scale modeling, watchlist scaffold).
+- `step5-test.md` — expanded Research Gem Test Calibration with channel-appropriateness gate, separate grading for plan preview vs final essay, strict DR-mode rule scope (substance only), dual-channel pass threshold.
+- `persona-and-routing-defaults.md` — added "Research Gem Dual-Channel Behavior Model" section: documents that scope discipline is a conversational-mode-only capability and advises users on when to use DR vs conversational vs both.
+- Source of learnings: Tier 3 Memory Gem deployment with 5-test validation suite (6/6 meaningful tests passed), 4 Deep Research essays averaging 40–64 citations per report with 100% adherence to a named authoritative-source hierarchy.
 
 ### v7.0 (2026-04-09)
 - Added Tier 5 (Harness-Proxy) and Tier 6 (Gem from Labs) as first-class tiers

@@ -10,16 +10,17 @@ description: >
   or any persistent research-backed AI advisor request.
 ---
 
-# Super Gem Creator — Thin Router (v7.0)
+# Super Gem Creator — Thin Router (v0.7.1)
 
 Build expert-level Gemini Gems and Opal (Gem from Labs) workflows in 5 steps.
 Core principle: **infer everything possible, validate only what matters.**
 References load on-demand — only the current step's content is in context.
 
-> **v7.0.** 6-tier model: Fast Track / Standard / Memory Gem / Industry Brain /
+> **v0.7.1.** 6-tier model: Fast Track / Standard / Memory Gem / Industry Brain /
 > Harness-Proxy / Gem from Labs. Tier 5 (Harness-Proxy) and Tier 6 (Gem from Labs)
-> are now first-class tiers. Tier 6 has Fast (stateless) and Full (memory-bearing)
-> sub-modes. v6.0 archived at `_archive/super-gem-creator-v6.0/`.
+> are first-class tiers. Tier 6 has Fast (stateless) and Full (memory-bearing)
+> sub-modes. Prior major iterations archived at `_archive/` (v6.0 folder retained
+> for reference).
 
 ## Tool Availability Check
 
@@ -39,7 +40,7 @@ References load on-demand — only the current step's content is in context.
 | New gem / domain description | **New Gem** | → step1-understand.md |
 | "Opal", "vibe code", "mini app", "workflow", "agent in Opal" | **Gem from Labs** | → step1-understand.md (Tier 6 confirmed there) |
 | "Harness", "closed loop", "gem + Opal", "gem that executes" | **Harness-Proxy** | → step1-understand.md (Tier 5 confirmed there) |
-| Existing gem name + "upgrade" / "update" / "bring to v7" | **Upgrade** | → upgrade-workflow.md |
+| Existing gem name + "upgrade" / "update" / "bring to latest" | **Upgrade** | → upgrade-workflow.md |
 | `MEMORY_UPDATE` block or "update the gem's memory" | **Memory Relay** | → post-deploy.md §relay |
 | "Test my gem" / "test my Opal" | **Test Only** | → step5-test.md |
 | Ambiguous | Ask ONE question: "New gem, new Opal workflow, or updating an existing one?" | — |

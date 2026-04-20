@@ -15,7 +15,45 @@ Read state from `_state/step4-deploy.json`. Use `references/test-questions-templ
 
 ## Research Gem Test Calibration
 
-Test 3 (constraint check) should include: "Does the gem correctly cite which notebook a finding came from?" Test 4 becomes cross-notebook synthesis: ask a question requiring info from multiple notebooks and verify integration. Full 5-test suite still applies.
+Research Gems operate across two channels (conversational + Deep Research) and must be graded accordingly. See `test-questions-template.md` → "Research Gem Adaptations" for the channel-aware test design and pre-execution refinement loop.
+
+### Channel-Appropriateness Gate (run BEFORE any test)
+
+Before executing a Research Gem test, verify the test is valid for its intended channel:
+
+| If the test targets... | Valid channel | Invalid channel |
+|------------------------|---------------|-----------------|
+| Sourcing, framework, triangulation, proxy methodology | Deep Research | — |
+| Role discipline, session ritual, MEMORY_UPDATE, output tags, redirect behavior | Conversational | Deep Research |
+| Memory hub read, constraint respect, never-recommend | Conversational | Deep Research |
+
+**Running a form-layer test in DR mode produces a false failure.** If the test is invalid for its channel, redesign before running.
+
+### Separate Grading: Plan Preview vs Final Essay
+
+In DR mode, grade two artifacts independently — plan scope drift is itself a fail signal, even if the final essay looks acceptable.
+
+| Artifact | Grade against | Pass criterion |
+|----------|---------------|----------------|
+| Plan preview (pre-execution) | Methodology rules: framework commitment, source hierarchy, sub-question scope | Plan matches methodology BEFORE any refinement, or matches after ≤2 refinement rounds |
+| Final essay (post-execution) | Substance rules only: sourcing discipline (Rule 2), framework naming (Rule 3), triangulation (Rule 7) | ≥95% compliance on all three substance rules + 100% compliance on any explicit refinements sent |
+
+### DR-Mode Rule Scope (strict)
+
+Grade the final essay against **substance rules only**. Do NOT grade against form rules that DR suppresses:
+
+| Rule layer | Examples | Grade in DR? |
+|------------|----------|-------------|
+| Substance (preserved by DR) | Rule 2 sourcing, Rule 3 framework naming, Rule 7 triangulation, proxy disclosure, ranges, bias flags | **Yes — strictly** |
+| Form (suppressed by DR) | Rule 4 session rituals, Rule 5 HITL gates, MEMORY_UPDATE emission, `[ADVISORY]` / `[SESSION_SUMMARY]` tags, `[UNVERIFIED]` / `[ESTIMATED]` brackets | **No — test in conversational mode instead** |
+
+See `gemini-gems-specs-and-limits.md` → "What DR Preserves vs Suppresses" for the complete split.
+
+### Research Gem Pass Threshold
+
+- **Conversational mode:** standard 5-test pass (including Test 5 MEMORY_UPDATE, non-optional)
+- **DR mode:** substance compliance on the essay + refinement compliance (100% on every explicit refinement sent before "Start research")
+- **Combined pass:** the gem passes Research Gem validation when both channels pass their respective thresholds. Neither alone is sufficient for production ready.
 
 ## Local Gem Test Calibration
 
