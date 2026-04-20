@@ -1,0 +1,3 @@
+# Skill runtime state — gem-specific data written by step1-step5 execution.
+# Contains gem names and deployment specifics that don't belong in the public repo.
+_state/
