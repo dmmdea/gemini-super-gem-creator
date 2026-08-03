@@ -1,5 +1,7 @@
 # Super Gem Creator (v0.7.1)
 
+![License: Apache-2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg) ![Claude Cowork Skill](https://img.shields.io/badge/Claude-Cowork_Skill-8A2BE2) ![Gemini](https://img.shields.io/badge/Google-Gemini_Gems-4285F4) ![NotebookLM](https://img.shields.io/badge/grounded-NotebookLM-34A853)
+
 A Cowork skill for building expert-level Gemini Gems and Opal (Gem from Labs) workflows with persistent Drive/Sheets memory, NotebookLM research grounding, and optional Harness-Proxy automation.
 
 > **Built for AI power users** who want production-quality Gemini advisors and Opal agents — not just a system prompt, but a full memory architecture, test suite, and deployment pipeline.
